@@ -9,18 +9,24 @@ class Grid {
 public:
     Grid() : width_(0), height_(0), depth_(0) {}
 
+	// retuns the width of the maze
     int width() const {
         return width_;
     }
 
+	// retuns the hieght of the maze
     int height() const {
         return height_;
     }
-
+	
+	// returns the depth of the maze
     int depth() const {
         return depth_;
     }
 
+	// returns the value(int) of the maze at a given point, point is defined 
+	// as (row, column, level)
+	// if the point is out of bounds, it will print an error message
     int& at(int row, int column, int level) {
         return const_cast<int&>(const_cast<const Grid&>(*this).at(row, column, level));
     }
@@ -50,6 +56,12 @@ public:
         return spaces[level * width_ * height_ + row * width_ + column];
     }
 
+
+	// reads in the maze from an input stream
+	// example:
+	// ifstream fin("filename.txt") // declares a if stream
+	// Grid maze; // delcares grid object
+	// fin >> maze; // reads in the whole maze
     friend std::istream& operator>>(std::istream& is, Grid& maze) {
         int height;
         int width;
